@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+* {
+  font-family: "Roboto", sans-serif;
+}
+
 html { 
   background: url(/images/site/checkerboard.jpg) no-repeat center center fixed; 
   background-size: cover;
@@ -19,23 +23,19 @@ html {
   border-width: 10px;
 } 
 
+
+
 header {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  margin: auto;
-
+  justify-content: space-between;
+  padding: 0 10px;
 }
 
-#top-header{
-text-decoration: none;
-color: black;
-font-size: 1.5rem;
-}
-
-.tools {
-  align-self: right;
+header a {
+  font-size: 2em;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
 }
 
 nav {
@@ -54,6 +54,7 @@ nav ul {
 nav ul li {
   align-items: center;
   margin: 0 10px;
+  font-weight: bold;
 }
 
 main {
@@ -64,57 +65,28 @@ main {
 }
 
 .hero {
+  grid-column: 1/3;
+  grid-row: 1/2;
 	margin: 10px auto;
 	position: relative;
-	border: 1px solid rgba(0,0,0,.1);
-	height: 300px;
-}
+} 
 
-.hero img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
 
 .herolabel {
-	position: absolute;
-	top: 30px;
-	left: 30px;
-	background: radial-gradient(#fff, #4D5B97);
-	border: 1px solid rgba(0,0,0,.75);
-	padding: 1.5rem;
-	box-shadow: 0 0 3rem #fff;
-	opacity: 0.75;
-	/* Buenas */
-}
-
-.herolabel p {
-	margin: 0;
-	padding: .25rem;
-	font-weight: 700;
-	font-size: 2rem;
-	font-family:"Great Vibes", serif;
-}
-
-
-
-/* .hero-message{
-  grid-column: 1/2;
-  background-color: white;
-  color: black;
-  height: 50%;
-  width: 50%;
+  transform: translate(-50%, -50%); 
+  background-color: white; 
+  color: black; 
+  padding: 10px 20px; 
+  font-size: 20px; 
   text-align: center;
-	border: 1px solid rgba(0,0,0,.75);
-	padding: 1.5rem;
-	box-shadow: 0 0 3rem #fff;
-	opacity: 0.75;
+  border: #1e555c;
+  background-color: rgba(255, 255, 255, 0.5);
+  /* position: absolute; */
+  border-radius: 10px;
+  box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.5);
+
 }
 
-.heroimage{
-  grid-column: 2/3;
-  object-fit: cover;
-} */
 
 
 footer {
@@ -175,7 +147,6 @@ footer {
   font-weight: bolder;
 }
 
-/* media screen for largers screens */
 @media screen and (min-width: 768px) {
 
   .backgroundimg img{
@@ -188,14 +159,41 @@ footer {
 
 /* media screen for mobile */
 @media screen and (max-width: 768px) {
+
   html { 
     background: none;
   }
-
-  .heroimage img{
-    width: 100%;
-    transform: scale(0.5);
+  .herolabel{
+    font-size: 10px;
+  
+  }
+  main {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    display: grid;
   }
 
+
+  header {
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+footer {
+  font-size: var(--small-font);
+  padding: 1em;
+}
+.hero {
+  margin: 10px auto;
+  position: relative;
+  align-items: center;
 }
 
+.herolabel {
+  font-size: 10px;
+  padding: 5px 10px;
+
+}
+}
