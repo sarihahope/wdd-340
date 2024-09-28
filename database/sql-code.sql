@@ -248,15 +248,6 @@ WHERE inv_make = 'GM' AND inv_model = 'Hummer';
 
 
 
---inner joiin 
-
-SELECT inv_make, inv_model, classification_name
-FROM public.inventory
-INNER JOIN public.classification
-ON inventory.classification_id = classification.classification_id
-WHERE classification_name = 'Sport';
-
-
 --Add '/vehicles' tot he middle of the file path in the inv_image and inv_thumbnail columns
 
 UPDATE public.inventory
