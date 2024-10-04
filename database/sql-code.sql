@@ -1,6 +1,9 @@
 CREATE TYPE public.account_type AS ENUM
     ('Client', 'Employee', 'Admin');
 
+ALTER TYPE public.account_type
+      OWNER TO "db340";
+
 
 -- Table structure for table 'classification'
 CREATE TABLE public.classification (
@@ -250,12 +253,3 @@ WHERE inv_make = 'GM' AND inv_model = 'Hummer';
 UPDATE public.inventory
 SET inv_image = CONCAT(SUBSTRING(inv_image, 1, 8), 'vehicles/', SUBSTRING(inv_image, 9)),
 inv_thumbnail = CONCAT(SUBSTRING(inv_thumbnail, 1, 8), 'vehicles/', SUBSTRING(inv_thumbnail, 9));
-
-
-
-
-
-
-
-
-
