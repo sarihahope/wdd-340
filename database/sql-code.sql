@@ -248,8 +248,8 @@ WHERE inv_make = 'GM' AND inv_model = 'Hummer';
 --Add '/vehicles' tot he middle of the file path in the inv_image and inv_thumbnail columns
 
 UPDATE public.inventory
-SET inv_image = CONCAT(SUBSTRING(inv_image, 1, 8), '/vehicles', SUBSTRING(inv_image, 9)),
-inv_thumbnail = CONCAT(SUBSTRING(inv_thumbnail, 1, 8), '/vehicles', SUBSTRING(inv_thumbnail, 9));
+SET inv_image = CONCAT(SUBSTRING(inv_image, 1, 8), 'vehicles/', SUBSTRING(inv_image, 9)),
+inv_thumbnail = CONCAT(SUBSTRING(inv_thumbnail, 1, 8), 'vehicles/', SUBSTRING(inv_thumbnail, 9));
 
 
 
