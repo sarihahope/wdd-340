@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+
 const Util = {}
 
 /* ************************
@@ -58,5 +59,27 @@ Util.buildClassificationGrid = async function(data){
   }
   return grid
 }
+
+// Build the spefic vehicle information view HTML
+Util.buildSingleVehicle = async function(data){
+  let vehicle = data[0]
+  let html = '<div id="inv-display">'
+  html += '<h1>' + vehicle.inv_make + ' ' + vehicle.inv_model + '</h1>'
+  html += '<img src="' + vehicle.inv_image + '" alt="Image of ' + vehicle.inv_make + ' ' + vehicle.inv_model + ' on CSE Motors" />'
+  html += '<div id="inv-details">'
+  html += '<h2>Details</h2>'
+  html += '<ul>'
+  html += '<li><strong>Price:</strong> $' + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</li>'
+  html += '<li><strong>Year:</strong> ' + vehicle.inv_year + '</li>'
+  html += '<li><strong>Color:</strong> ' + vehicle.inv_color + '</li>'
+  html += '<li><strong>Description:</strong> ' + vehicle.inv_description + '</li>'
+  html += '<li><strong>Miles:</strong> ' + vehicle.inv_miles + '</li>'
+  html += '</ul>'
+  html += '</div>'
+  html += '</div>'
+  return html
+}
+
+Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
 
 module.exports = Util
