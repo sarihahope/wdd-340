@@ -26,12 +26,19 @@ invCont.buildSingleVehicle = async function (req, res, next) {
   const html = await utilities.buildSingleVehicle(data)
   let nav = await utilities.getNav()
   const vehicle = data
-  res.render("./inventory/singleclassification", {
+  res.render("./inventory/inventory", {
     title: vehicle + "TITLE",
     nav,
     html,
   })
 }
+
+// contor for an error button
+invCont.buildError = async function (req, res, next) {
+  next({ status: 500, message: "This is a test error message." })
+}
+
+
 
 
 module.exports = invCont

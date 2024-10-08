@@ -123,11 +123,17 @@ footer {
 
 } 
 
-
 #inv-display a, #inv-display a:link, #inv-display a:visited, #inv-display a:active {
   color: black;
   text-decoration: none;
 }
+
+.single{
+  color: black;
+  align-content: center;
+}
+
+
 
 .upgrade {
   grid-template-columns: 1fr 1fr;
