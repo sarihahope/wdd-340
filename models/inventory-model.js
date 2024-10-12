@@ -39,7 +39,28 @@ async function getInventoryByClassificationId(classification_id) {
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId,  getClassificationById}
+// Add new-classification to the database
+async function addClassification(classification_name){
+  try {
+    const sql = "INSERT INTO public.classification (classification_name) VALUES ($1) RETURNING *"
+    return await pool.query(sql, [classification_name])
+  } catch (error) {
+    return error.message
+  }
+}
+
+// add inventory to the database model
+async function addInventory(data){
+  try {
+    const sql = "INSERT INTO public.inventory (classification_id, inv_year, inv_make, inv_model) VALUES ($1, $2, $3, $4) RETURNING *"
+    return await pool.query(sql, [data.classification_id, data.inv_year, data.inv_make, data.inv_model])
+  } catch (error) {
+    return error.message
+  }
+}
+
+
+module.exports = {getClassifications, getInventoryByClassificationId,  getClassificationById, addClassification, addInventory}
 
 
 

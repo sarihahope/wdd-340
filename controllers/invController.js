@@ -41,6 +41,29 @@ invCont.buildError = async function (req, res, next) {
 }
 
 
+// Add Classification controller
+invCont.buildAddClassification = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/add-classification", {
+    title: "Add Classification",
+    nav,
+    errors: null,
+  })
+}
+
+// Add inventory controller
+invCont.buildAddInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/add-inventory", {
+    title: "Add Inventory",
+    nav,
+    errors: null,
+  })
+}
+
+
+
+
 
 
 module.exports = invCont

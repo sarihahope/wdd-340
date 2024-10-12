@@ -18,6 +18,8 @@ const session = require("express-session")
 const pool = require('./database/')
 const account = require("./routes/accountRoute")
 const bodyParser = require("body-parser")
+const addClassification = require("./routes/inventoryRoute")
+
 
 
 /* ***********************
@@ -75,6 +77,7 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 // Account Route
 app.use("/account", require("./routes/accountRoute"))
 app.use("/register", require("./routes/accountRoute"))
+app.use("/add-classification", require("./routes/inventoryRoute"))
 
 
 // File Not Found Route - must be last route in list

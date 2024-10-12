@@ -1,0 +1,19 @@
+<% if (title) { %>
+    <!-- <h1><%= title %></h1> -->
+    <% } else {
+      res.redirect('/')
+    } %>
+  
+  
+  <%# messages() %>
+  
+  
+  <%- html %>
+
+    <% if (flash) { %>
+        <div class="flash">
+        <p><%= flash %></p>
+        </div>
+    <% } %>
+
+

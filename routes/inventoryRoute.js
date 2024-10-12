@@ -9,6 +9,11 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 
 router.get("/detail/:invId", invController.buildSingleVehicle);
 
+// Route to build adding-classification view
+router.get("/add-classification", invController.buildAddClassification);
+
+// route to build adding-inventory view
+router.get("/add-inventory", invController.buildAddInventory);
 
 module.exports = router;
 

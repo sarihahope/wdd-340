@@ -81,6 +81,51 @@ Util.buildSingleVehicle = async function(data){
   return html
 }
 
+Util.buildClassificationList = async function (classification_id = null) {
+  let data = await invModel.getClassifications()
+  let classificationList =
+    '<select name="classification_id" id="classificationList" required>'
+  classificationList += "<option value=''>Choose a Classification</option>"
+  data.rows.forEach((row) => {
+    classificationList += '<option value="' + row.classification_id + '"'
+    if (
+      classification_id != null &&
+      row.classification_id == classification_id
+    ) {
+      classificationList += " selected "
+    }
+    classificationList += ">" + row.classification_name + "</option>"
+  })
+  classificationList += "</select>"
+  return classificationList
+}
+
+// Build the add classification form
+Util.buildAddClassificationForm = async function () {
+  let form = '<form action="/inv/add-classification" method="post">'
+  form += '<label for="classification_name">Classification Name:</label>'
+  form += '<input type="text" name="classification_name" id="classification_name" required />'
+  form += '<button type="submit">Add Classification</button>'
+  form += '</form>'
+  return form
+}
+
+// Build the add inventory form
+Util.buildAddInventoryForm = async function () {
+  let form = '<form action="/inv/add-inventory" method="post">'
+  form += '<label for="classification_id">Classification:</label>'
+  form += await Util.buildClassificationList()
+  form += '<label for="inv_year">Year:</label>'
+  form += '<input type="number" name="inv_year" id="inv_year" required />'
+  form += '<label for="inv_make">Make:</label>'
+  form += '<input type="text" name="inv_make" id="inv_make" required />'
+  form += '<label for="inv_model">Model:</label>'
+  form += '<input type="text" name="inv_model" id="inv_model" required />'
+  form += '<button type="submit">Add Inventory</button>'
+  form += '</form>'
+  return form
+}
+
 
 
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
