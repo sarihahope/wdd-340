@@ -45,10 +45,11 @@ async function registerAccount(req, res) {
     })
   }
   
-  const regResult = await accountModel.accountRegister(
+  const regResult = await accountModel.registerAccount(
     account_firstname,
     account_lastname,
     account_email,
+    account_password,
     hashedPassword
   )
   

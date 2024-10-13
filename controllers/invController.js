@@ -40,6 +40,14 @@ invCont.buildError = async function (req, res, next) {
   next({ status: 500, message: "This is a test error message." })
 }
 
+invCont.renderManagementView = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("inventory/management", {
+    title: "Management",
+    nav,
+    errors: null,
+  })
+}
 
 // Add Classification controller
 invCont.buildAddClassification = async function (req, res, next) {
@@ -61,14 +69,7 @@ invCont.buildAddInventory = async function (req, res, next) {
   })
 }
 
-invCont.renderManagementView = async function (req, res, next) {
-  let nav = await utilities.getNav()
-  res.render("inventory/management", {
-    title: "Management",
-    nav,
-    errors: null,
-  })
-}
+
 
 
 
