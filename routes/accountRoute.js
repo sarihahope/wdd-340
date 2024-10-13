@@ -7,14 +7,14 @@ const regValidate = require('../utilities/account-validation')
 
 
 router.get("/login", utilities.handleErrors(accountController.buildLogin))
-router.get("/register", utilities.handleErrors(accountController.buildRegister))
-// Process the registration data
-router.post(
-  "/register",
-  regValidate.registationRules(),
-  regValidate.checkRegData,
-  utilities.handleErrors(accountController.registerAccount)
-)
+// router.get("/register", utilities.handleErrors(accountController.buildRegister))
+// // Process the registration data
+// router.post(
+//   "/register",
+//   regValidate.registationRules(),
+//   regValidate.checkRegData,
+//   utilities.handleErrors(accountController.registerAccount)
+// )
 
 // Error handler middleware
 router.use(async (err, req, res, next) => {
@@ -34,6 +34,10 @@ router.post(
     res.status(200).send('login process')
   }
 )
+
+router.get('/register', accountController.buildRegister)
+
+router.post('/register', regValidate.registationRules(), regValidate.checkRegData, accountController.registerAccount)
 
 
 module.exports = router;

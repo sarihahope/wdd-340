@@ -9,6 +9,8 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 
 router.get("/detail/:invId", invController.buildSingleVehicle);
 
+
+
 // Route to build adding-classification view
 router.get("/add-classification", invController.buildAddClassification);
 

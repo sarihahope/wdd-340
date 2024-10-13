@@ -61,6 +61,14 @@ invCont.buildAddInventory = async function (req, res, next) {
   })
 }
 
+invCont.renderManagementView = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("inventory/management", {
+    title: "Management",
+    nav,
+    errors: null,
+  })
+}
 
 
 
