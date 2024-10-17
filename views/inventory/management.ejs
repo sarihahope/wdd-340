@@ -4,21 +4,7 @@
       res.redirect('/')
     } %>
   
-  
-  <%# messages() %>
-  
-  
-  <%- html %>
-
-    <% if (flash) { %>
-        <div class="flash">
-        <p><%= flash %></p>
-        </div>
-    <% } %>
-
-
-
-    <div class="management-container">
+    <div class="management">
       <a href="/inv/add-classification">Add new classification</a><br><br>
       <a href="/inv/add-inventory">Add new inventory</a>
   </div>

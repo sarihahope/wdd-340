@@ -3,25 +3,20 @@ const express = require("express")
 const router = new express.Router() 
 const invController = require("../controllers/invController")
 
-// Route to build inventory by classification view
+// Route to build inventory by classification view & single view
 router.get("/type/:classificationId", invController.buildByClassificationId);
- 
-
-router.get("/detail/:invId", invController.buildSingleVehicle);
+ router.get("/detail/:invId", invController.buildSingleVehicle);
 
 // Management routes
-
 router.get("/", invController.renderManagementView);
-// router.get("/add-classification", invController.renderClassificationView);
-// router.get("/add-inventory", invController.renderInventoryView);
+router.get("/add-classification", invController.renderClassificationView);
+router.get("/add-inventory", invController.renderAddInventoryView);
 
-// Route to build adding-classification view
-router.get("/add-classification", invController.buildAddClassification);
+// Add classification route
+router.post("/add-classification", invController.addClassification);
 
-// route to build adding-inventory view
-router.get("/add-inventory", invController.buildAddInventory);
-
-router.post("/add-classification", invController.buildAddClassification);
+// Add inventory route
+router.post('/add-inventory', invController.addInventory)
 
 module.exports = router;
 

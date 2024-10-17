@@ -8,6 +8,19 @@
 
 </div>
 
+<!-- Form for adding a classification to database -->
+ <div class="classificationform">
+  <form action="/inventory/add-classification" method="post">
+      <div class="form-group">
+          <label for="classification">Classification</label>
+          <input type="text" id="classification_name" name="classification_name" required value="<%= typeof classification_name !== 'undefined' ? classification_name : '' %>"><br><br>
+      </div>
+  </form>
+<input type="submit" value="Add Classification"><br><br>
+</div>
+
+<label><a href="/inv" id="return_management">Back to Management </a> </label>
+
 
 
 

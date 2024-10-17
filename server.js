@@ -6,6 +6,7 @@
 /* ***********************
  * Require Statements
  *************************/
+const cookieParser = require("cookie-parser")
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
@@ -18,7 +19,7 @@ const session = require("express-session")
 const pool = require('./database/')
 const account = require("./routes/accountRoute")
 const bodyParser = require("body-parser")
-const addClassification = require("./routes/inventoryRoute")
+// const addClassification = require("./routes/inventoryRoute")
 
 
 
@@ -35,6 +36,8 @@ app.use(session({
   saveUninitialized: true,
   name: 'sessionId',
 }))
+
+app.use(cookieParser())
 
 // Express Messages Middleware
 app.use(require('connect-flash')())
@@ -76,8 +79,8 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 
 // Account Route
 app.use("/account", require("./routes/accountRoute"))
-app.use("/register", require("./routes/accountRoute"))
-app.use("/add-classification", require("./routes/inventoryRoute"))
+// app.use("/register", require("./routes/accountRoute"))
+// app.use("/add-classification", require("./routes/inventoryRoute"))
 
 
 // File Not Found Route - must be last route in list
