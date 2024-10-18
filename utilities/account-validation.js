@@ -75,6 +75,36 @@ validate.checkRegData = async (req, res, next) => {
     next()
   }
   
+
+  /*  **********************************
+  *  login Data Validation Rules
+  * ********************************* */
+  validate.loginRules = () => {
+    return [
+      
+      body("account_email")
+        .trim()
+        .escape()
+        .notEmpty()
+        .isEmail()
+        .normalizeEmail()
+        .withMessage("Please provide a valid email: name@domain.com"),
+  
+      
+      body("account_password")
+        .trim()
+        .notEmpty()
+        .isStrongPassword({
+          minLength: 5,
+          minLowercase: 1,
+          minUppercase: 1,
+          minNumbers: 1,
+          minSymbols: 1,
+        })
+        .withMessage("Please provide a valid password: 5 min, 1 lowercase, 1 uppercase, 1 number, and 1 symbol."),
+    ]
+  }
+
   module.exports = validate
 
   

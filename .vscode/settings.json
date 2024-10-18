@@ -2,13 +2,13 @@
     "sqltools.connections": [
         {
             "previewLimit": 50,
-            "server": "",
+            "server": "postgresql://db340:ZRApzJJgDC6rh4Hp4vNASPoCK4i66VwO@dpg-crvkj4q3esus7392htmg-a/db340_jzno",
             "port": 5500 ,
             "driver": "PostgreSQL",
             "name": "pgAdmin",
-            "database": "",
-            "username": "",
-            "password": ""
+            "database": "db340",
+            "username": "db340",
+            "password": "ZRApzJJgDC6rh4Hp4vNASPoCK4i66VwO"
         }
     ]
 }

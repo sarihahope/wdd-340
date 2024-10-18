@@ -6,7 +6,6 @@
 /* ***********************
  * Require Statements
  *************************/
-const cookieParser = require("cookie-parser")
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
@@ -17,10 +16,9 @@ const inventoryRoute = require("./routes/inventoryRoute")
 const utilities = require("./utilities/index")
 const session = require("express-session")
 const pool = require('./database/')
-const account = require("./routes/accountRoute")
+const accountRoute = require('./routes/accountRoute')
 const bodyParser = require("body-parser")
-// const addClassification = require("./routes/inventoryRoute")
-
+const cookieParser = require("cookie-parser")
 
 
 /* ***********************
@@ -48,6 +46,7 @@ app.use(function(req, res, next){
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(utilities.checkJWTToken)
 
 
 /* ***********************
@@ -63,24 +62,13 @@ app.set("layout", "./layouts/layout") // not at views root
  *************************/
 app.use(static)
 
-// Index route
-/*
-app.get("/", function(req, res){
-  res.render("index", {title: "Home"})
-})
-*/
-
-app.get("/", baseController.buildHome)
-
-
-// Inventory routes
-app.use("/inv", inventoryRoute)
 app.get("/", utilities.handleErrors(baseController.buildHome))
+// Inventory routes added
+app.use("/inv", inventoryRoute)
+// account route
+app.use("/account", accountRoute)
 
-// Account Route
-app.use("/account", require("./routes/accountRoute"))
-// app.use("/register", require("./routes/accountRoute"))
-// app.use("/add-classification", require("./routes/inventoryRoute"))
+
 
 
 // File Not Found Route - must be last route in list
