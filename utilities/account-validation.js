@@ -6,7 +6,7 @@ const utilities = require(".")
   /*  **********************************
   *  Registration Data Validation Rules
   * ********************************* */
-  validate.registationRules = () => {
+  validate.regRules = () => {
     return [
       // firstname is required and must be string
       body("account_firstname")
