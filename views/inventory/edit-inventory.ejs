@@ -8,7 +8,7 @@
     <%- messages() %>
     
     <div class="editinventoryform">
-        <form action="/inv/update" method="post">
+        <form action="/inv/update" class="updateForm" method="post">
           <div class="editinventory">
             <label>Classification:</label><br>
             <%- classificationList %><br><br>
@@ -39,6 +39,9 @@
       
           <div class="edit-inventory-button">
             <input type="submit" name="submit" value="Update Vehicle">
+            <input type="hidden" name="inv_id"
+                    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+                              <% } %>>
             <label><a href="/inv" id="return_management">Return to management </a> </label>
           </div>
       

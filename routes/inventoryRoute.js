@@ -23,6 +23,7 @@ router.post('/add-inventory', invValidate.addInventoryRules(), invValidate.check
 // Add a new route that matches /inv/edit/, and add a parameter to the end of the route to represent the inventory_id value that will be passed in through the URL.
 router.get('./inventory/edit-inventory', invController.editInventoryView);
 router.post('./inventory/edit-inventory', invValidate.addInventoryRules(), invValidate.checkAddInvData);
+router.post("/update/", invController.updateInventory)
 
 module.exports = router;
 
