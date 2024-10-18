@@ -11,7 +11,7 @@ router.get('/login', accountController.buildLogin)
 router.get('/register', accountController.buildRegister)
 router.get('/management', accountController.buildManagement)
 
-router.post('/register', regValidate.registationRules(), regValidate.checkRegData, accountController.registerAccount)
+router.post('/register', accountController.registerAccount)
 router.post(
     "/login",
     regValidate.loginRules(),
