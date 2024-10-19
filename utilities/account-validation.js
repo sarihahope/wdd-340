@@ -14,31 +14,26 @@ const utilities = require(".")
         .escape()
         .notEmpty()
         .isLength({ min: 1 })
-        .withMessage("Please provide a first name."), // on error this message is sent.
-  
-      // lastname is required and must be string
+        .withMessage("Please provide a first name."),
       body("account_lastname")
         .trim()
         .escape()
         .notEmpty()
         .isLength({ min: 2 })
-        .withMessage("Please provide a last name."), // on error this message is sent.
+        .withMessage("Please provide a last name."), 
+
+      body("account_email")
+        .trim()
+        .isEmail()
+        .normalizeEmail() 
+        .withMessage("A valid email is required.")
+        .custom(async (account_email) => {
+        const emailExists = await accountModel.checkExistingEmail(account_email)
+        if (emailExists){
+            throw new Error("Email exists. Please log in or use different email")
+          }
+        }),
   
-      // valid email is required and cannot already exist in the DB
-// valid email is required and cannot already exist in the database
-  body("account_email")
-    .trim()
-    .isEmail()
-    .normalizeEmail() // refer to validator.js docs
-    .withMessage("A valid email is required.")
-    .custom(async (account_email) => {
-    const emailExists = await accountModel.checkExistingEmail(account_email)
-    if (emailExists){
-      throw new Error("Email exists. Please log in or use different email")
-    }
-  }),
-  
-      // password is required and must be strong password
       body("account_password")
         .trim()
         .notEmpty()
@@ -52,6 +47,7 @@ const utilities = require(".")
         .withMessage("Password does not meet requirements."),
     ]
   }
+  
 
   /* ******************************
  * Check data and return errors or continue to registration

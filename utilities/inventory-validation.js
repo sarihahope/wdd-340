@@ -9,7 +9,6 @@ const utilities = require(".")
   * ********************************* */
     validate.inventoryRules = () => {
       return [
-        // classification name is required and must be string
         body("classification_name")
           .trim()
           .escape()
@@ -24,7 +23,7 @@ const utilities = require(".")
   * ********************************* */
     validate.addInventoryRules = () => {
       return [
-        // classification name is required and must be string
+
         body("inv_make")
           .trim()
           .isString()

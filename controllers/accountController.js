@@ -16,7 +16,7 @@ async function buildLogin(req, res, next) {
     })
   }
 
-//   Deliver account view
+//   Deliver registration view
 async function buildRegister(req, res, next) {
     let nav = await utilities.getNav()
     res.render("account/register", {
@@ -62,6 +62,7 @@ async function registerAccount(req, res) {
     res.status(201).render("account/login", {
       title: "Login",
       nav,
+      errors: null  
     })
   } else {
     req.flash("notice", "Registration has failed.")
@@ -115,13 +116,13 @@ async function accountLogin(req, res) {
 }
 
 // Buils contorer for delivering the account view
-async function accountView(req, res) {
-  let nav = await utilities.getNav()
-  res.render("account/account", {
-    title: "Account",
-    nav,
-  })
-}
+// async function accountView(req, res) {
+//   let nav = await utilities.getNav()
+//   res.render("account/account", {
+//     title: "Account",
+//     nav,
+//   })
+// }
 
 async function buildManagement(req, res, next) {
   let nav = await utilities.getNav()
@@ -132,5 +133,5 @@ async function buildManagement(req, res, next) {
 }
 
   
-  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, accountView, buildManagement }
+  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildManagement }
 

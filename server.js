@@ -63,12 +63,8 @@ app.set("layout", "./layouts/layout") // not at views root
 app.use(static)
 
 app.get("/", utilities.handleErrors(baseController.buildHome))
-// Inventory routes added
 app.use("/inv", inventoryRoute)
-// account route
 app.use("/account", accountRoute)
-
-
 
 
 // File Not Found Route - must be last route in list

@@ -9,9 +9,16 @@ const utilities = require("../utilities/")
 router.get("/", utilities.checkLogin, utilities.handleErrors(accountController.buildManagement))
 router.get('/login', accountController.buildLogin)
 router.get('/register', accountController.buildRegister)
-router.get('/management', accountController.buildManagement)
+router.get('/management', utilities.checkLogin, accountController.buildManagement)
 
-router.post('/register', accountController.registerAccount)
+
+router.post(
+    '/register', 
+    regValidate.regRules(), 
+    regValidate.checkRegData, 
+    accountController.registerAccount
+  )
+
 router.post(
     "/login",
     regValidate.loginRules(),

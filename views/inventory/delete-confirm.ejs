@@ -1,4 +1,4 @@
-<div class="add-inventory">
+<div class="delete-inventory">
     <% if (title) { %>
       <h1><%= title %></h1>
       <% } else {
@@ -6,19 +6,11 @@
       } %>
     
     <%- messages() %>
-
-    <% if (errors) { %>
-        <ul class="notice">
-       <% errors.array().forEach(error => { %>
-         <li><%= error.msg %></li>
-      <%  }) %>
-       </ul>
-      <% } %>
     
-    <div class="addinventoryform">
-        <form id="addform" class="add-inventory-form" action="/inv/add-inventory" method="post">
-          <div class="addinventory">
-            <label>Classification:</label><br>
+    <div class="Deleteinventoryform">
+        <form action="/inv/delete-confirm" class="DeleteForm" method="post">
+          <div class="Deleteinventory">
+            <!-- <label>Classification:</label><br>
             <%- classificationList %><br><br>
       
             <label for="inv_make">Make:</label><br>
@@ -43,11 +35,14 @@
       
             <label for="inv_color">Color:</label><br>
             <input type="text" id="inv_color" name="inv_color" required value="<%= typeof inv_color !== 'undefined' ? inv_color : '' %>"><br><br>
-          </div>
+          </div> -->
       
-          <div class="add-inventory-button">
-            <button type="submit" class="btn btn-primary">Add Inventory</button>
-            
+          <div class="delete-inventory-button">
+            <p>Confirm Deletion - The delete is permanent.</p>
+            <input type="submit" name="delete" value="Delete Vehicle">
+            <input type="hidden" name="inv_id"
+                    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+                              <% } %>>
             <label><a href="/inv" id="return_management">Return to management </a> </label>
           </div>
       

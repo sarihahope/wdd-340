@@ -4,24 +4,24 @@
       res.redirect('/')
     } %>
   
+  <h2>Manage Inventory</h2>
+  <p> Please select a classification from the list to view items belonging to that classification</p>
+  <form action="/inv/management" method="post">
     <div class="management">
       <a href="/inv/add-classification">Add new classification</a><br><br>
       <a href="/inv/add-inventory">Add new inventory</a>
   </div>
-
-  <h2>Manage Inventory</h2>
-  <p> Please select a classification from the list to view items belonging to that classification</p>
-  <form action="/inv/management" method="post">
-    <select name="classification">
-      <% classifications.forEach(function(classification) { %>
-        <option value="<%= classification.id %>"><%= classification.name %></option>
-      <% }) %>
+  <div class="classification">
+    <label for="classification">Classification:</label>
+    <select id="classification" name="classification">
+      <option value="">Select a classification</option>
+      <%- classificationList %>
     </select>
-    <input type="submit" value="View Inventory">
-
+    
     <table id="inventoryDisplay"></table>
 
     <noscript>JavaScript must be enabled to use this page.</noscript>
-  </form>
 
-  <script src="../../js/inventory.js"></script>
+
+  <script src="../../js/inventory.js"></script>  
+</form>

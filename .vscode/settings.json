@@ -3,12 +3,24 @@
         {
             "previewLimit": 50,
             "server": "postgresql://db340:ZRApzJJgDC6rh4Hp4vNASPoCK4i66VwO@dpg-crvkj4q3esus7392htmg-a/db340_jzno",
-            "port": 5500 ,
+            "port": 5500,
             "driver": "PostgreSQL",
             "name": "pgAdmin",
             "database": "db340",
             "username": "db340",
             "password": "ZRApzJJgDC6rh4Hp4vNASPoCK4i66VwO"
+        },
+        {
+            "pgOptions": {
+                "ssl": {
+                    "rejectUnauthorized": true
+                }
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "driver": "PostgreSQL",
+            "name": "render",
+            "connectString": "postgresql://db340:ZRApzJJgDC6rh4Hp4vNASPoCK4i66VwO@dpg-crvkj4q3esus7392htmg-a.oregon-postgres.render.com/db340_jzno"
         }
     ]
 }

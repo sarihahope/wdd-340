@@ -6,6 +6,16 @@
       } %>
     
     <%- messages() %>
+
+    <div clas="error">
+      <% if (errors) { %>
+        <ul>
+          <% errors.forEach(function(error) { %>
+            <li><%= error.msg %></li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </div>
     
     <div class="editinventoryform">
         <form action="/inv/update" class="updateForm" method="post">
