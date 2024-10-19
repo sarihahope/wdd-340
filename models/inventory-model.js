@@ -131,7 +131,7 @@ async function deleteInventoryItem(inv_id) {
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId,  getClassificationById,   addClassificationModel, addInventoryModel, updateInventory, deleteInventoryItem}
+module.exports = {getClassifications, getInventoryByClassificationId,  getClassificationById, addClassificationModel, addInventoryModel, updateInventory, deleteInventoryItem}
 
 
 

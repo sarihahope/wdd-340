@@ -13,20 +13,22 @@
    </ul>
   <% } %>
         
+ <div class="reg-div">
+  <form class="form-register" action="/account/register" method="post">
+    <label for="account_firstname">First name:</label><br>
+    <input type="text" id="firstname" name="account_firstname" required><br><br>
+    <label for="account_lastname">Last name:</label><br>
+    <input type="text" id="lastname" name="account_lastname" required><br><br>
+    <label for="account_email">Email:</label><br>
+    <input type="email" id="fname" name="account_email" required><br><br>
+    <label for="account_password">Password:</label><br>
+    <p>At least 12 characters, 1 number, 1 capital letter and 1 special character</p>
+    <input type="password" id="password" name="account_password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" required><br><br>
+    <button type="submit" class="btnSubmit">Register</button>
 
-<form class="form-register" action="/account/register" method="post">
-        <div class="form-group">
-            <label for="firstname">First Name</label>
-            <input type="text" name="account_firstname" id="accountFirstname" required value="<%= locals.account_firstname %>">
-            <label for="lastname">Last Name</label>
-            <input type="text" name="account_lastname" id="accountLastname" required value="<%= locals.account_lastname %>">
-            <label for="email">Email address</label>
-            <input type="text" name="account_email" id="accountEmail" required value="<%= locals.account_email %>">
-            <label for="accountPassword">Password:</label> 
-            <h3>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</h3> 
-            <input type="password" name="account_password" id="accountPassword" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
-            <button type="submit" class="btnSubmit">Register</button>
-        </div>
-    </form>
+    <div class="login">
+        <p>Already have an account? <a href="/account/login">Login</a></p>
+      </form>
+    </div>  
 </div>
 

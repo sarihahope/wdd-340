@@ -26,13 +26,14 @@ async function buildRegister(req, res, next) {
     })
   }
 
- /* ****************************************
+  /* ****************************************
 *  Process Registration
 * *************************************** */
 async function registerAccount(req, res) {
   let nav = await utilities.getNav()
   const { account_firstname, account_lastname, account_email, account_password } = req.body
 
+  // Hash the password
   let hashedPassword
   try {
     hashedPassword = await bcrypt.hashSync(account_password, 10)
@@ -45,12 +46,10 @@ async function registerAccount(req, res) {
     })
   }
 
-
   const regResult = await accountModel.registerAccount(
     account_firstname,
     account_lastname,
     account_email,
-    account_password,
     hashedPassword
   )
 
@@ -62,10 +61,10 @@ async function registerAccount(req, res) {
     res.status(201).render("account/login", {
       title: "Login",
       nav,
-      errors: null  
+      errors: null
     })
   } else {
-    req.flash("notice", "Registration has failed.")
+    req.flash("notice", "Sorry, registration has failed.")
     res.status(501).render("account/register", {
       title: "Registration",
       nav,
@@ -114,15 +113,6 @@ async function accountLogin(req, res) {
     throw new Error('Access Forbidden')
   }
 }
-
-// Buils contorer for delivering the account view
-// async function accountView(req, res) {
-//   let nav = await utilities.getNav()
-//   res.render("account/account", {
-//     title: "Account",
-//     nav,
-//   })
-// }
 
 async function buildManagement(req, res, next) {
   let nav = await utilities.getNav()

@@ -35,22 +35,6 @@ invCont.buildSingleVehicle = async function (req, res, next) {
   })
 }
 
-// contor for an error button
-invCont.buildError = async function (req, res, next) {
-  next({ status: 500, message: "This is a test error message." })
-}
-
-// Management view controller
-invCont.renderManagementView = async function (req, res, next) {
-  let nav = await utilities.getNav() 
-  const classificationSelect = await utilities.buildClassificationList()
-  res.render("inventory/management", {
-    title: "Management",
-    nav,
-    classificationSelect,
-    errors: null,
-  })
-}
 
 // Add-Classification controller
 invCont.renderClassificationView = async function (req, res, next) {
@@ -62,7 +46,17 @@ invCont.renderClassificationView = async function (req, res, next) {
   })
 }
 
-
+// // Management view controller
+// invCont.renderManagementView = async function (req, res, next) {
+//   let nav = await utilities.getNav() 
+//   const classificationSelect = await utilities.buildClassificationList()
+//   res.render("inventory/management", {
+//     title: "Management",
+//     nav,
+//     classificationSelect,
+//     errors: null,
+//   })
+// }
 
 /* ***************************
  *  Add classification to list
@@ -173,6 +167,17 @@ invCont.editInventoryView = async function (req, res, next) {
     inv_miles: itemData.inv_miles,
     inv_color: itemData.inv_color,
     classification_id: itemData.classification_id
+  })
+}
+
+invCont.renderManagementView = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const classificationList = await utilities.buildClassificationList()
+  res.render("inventory/management", {
+    title: "Management",
+    nav,
+    errors: null,
+    classificationList,
   })
 }
 

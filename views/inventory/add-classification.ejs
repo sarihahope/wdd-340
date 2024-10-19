@@ -19,13 +19,14 @@
     <% } %>
 
 <!-- Form for adding a classification to database -->
- <div class="classificationform">
-  <form action="/inventory/add-classification" method="post">
-      <div class="form-group">
-          <label for="classification">Classification</label>
-          <input type="text" id="classification_name" name="classification_name" required value="<%= typeof classification_name !== 'undefined' ? classification_name : '' %>"><br><br>
+<div class="add-classification-form-container">
+    <p>Name has to be letters only</p>
+    <form class="add-classification-form" action="/inv/add-classification" method="post">
+
+      <div class="add-classification-div">
+        <label for="classification_name">Enter Classification:</label><br>
+        <input type="text" id="classification_name" name="classification_name" required value="<%= typeof classification_name !== 'undefined' ? classification_name : '' %>"><br><br>
       </div>
-  </form>
   <button type="submit" class="btn btn-primary">Add Classification</button>
   
 <label><a href="/inv" id="return_management">Back to Management </a> </label>  
