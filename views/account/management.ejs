@@ -3,3 +3,16 @@
     <% } else {
         res.redirect('/')
     } %>
+
+<% if (accountType === 'Client') { %>
+    <h2>Welcome <%= first_name %></h2>
+<% } else { %>
+    <h2>Welcome <%= first_name %></h2>
+    <h3>Inventory Management</h3>
+    <p><a href="/inv">Access Inventory Management</a></p>
+<% } %>
+
+
+
+
+

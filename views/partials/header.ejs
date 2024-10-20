@@ -4,10 +4,42 @@
     </span>
     <div id="tools">
 
-        <a href="/account/login">My Account</a>
+        <a id="myAccountLink" href="/account/login">My Account</a>
+        <a id="logoutLink" href="#" style="display: none;">Logout</a>
 
-       
+        <button id="myAccountLink" href="/account/login">My Account</button>
+        <button id="logoutButton" style="display: none;">Logout</button>
     </div>
+
+    <script>
+      let isLoggedIn = false;
+
+      function updateLinks() {
+          const myAccountLink = document.getElementById('myAccountLink');
+          const logoutLink = document.getElementById('logoutLink');
+
+          if (isLoggedIn) {
+              myAccountLink.style.display = 'none';
+              logoutLink.style.display = 'inline';
+          } else {
+              myAccountLink.style.display = 'inline';
+              logoutLink.style.display = 'none';
+          }
+      }
+
+      document.getElementById('loginButton').addEventListener('click', () => {
+          isLoggedIn = true;
+          updateLinks();
+      });
+
+      document.getElementById('logoutLink').addEventListener('click', () => {
+          isLoggedIn = false;
+          updateLinks();
+      });
+
+      // Initial state
+      updateLinks();
+  </script>
   </header>
 
 
