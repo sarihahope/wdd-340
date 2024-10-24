@@ -96,6 +96,39 @@ invCont.renderAddInventoryView = async function (req, res, next) {
 }
 
 
+// invCont.addInventory = async function (req, res, next) {
+//   const { classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color } = req.body
+//   const inv = await invModel.addInventoryModel( 
+//     inv_make, 
+//     inv_model, 
+//     inv_description, 
+//     inv_image, 
+//     inv_thumbnail, 
+//     inv_price, 
+//     inv_year,
+//     inv_miles, 
+//     inv_color,
+//     classification_id
+//   )
+//   let nav = await utilities.getNav()
+//   let classificationList = await utilities.buildClassificationList();
+//   if (inv){
+//     req.flash(
+//       "notice", 'Yay, you have succeded.')
+//     res.status(201).render("inventory/management", {
+//       title: "Management",
+//       nav
+//     })
+//   } else {
+//     req.flash("notice", "Unforutly, this action has failed.")
+//     res.status(500).render("inventory/add-inventory", {
+//       title: "Add Inventory",
+//       nav,
+//       classificationList
+//     })
+//   }
+// }
+
 invCont.addInventory = async function (req, res, next) {
   const { classification_id, inv_make, inv_model, inv_description, inv_image, inv_thumbnail, inv_price, inv_year, inv_miles, inv_color } = req.body
   const inv = await invModel.addInventoryModel( 
@@ -114,13 +147,14 @@ invCont.addInventory = async function (req, res, next) {
   let classificationList = await utilities.buildClassificationList();
   if (inv){
     req.flash(
-      "notice", 'Yay, you have succeded.')
+      "notice", 'Congratulations, you did it!.')
     res.status(201).render("inventory/management", {
       title: "Management",
-      nav
+      nav,
+      classificationList
     })
   } else {
-    req.flash("notice", "Unforutly, this action has failed.")
+    req.flash("notice", "Sorry, adding inventory items failed!")
     res.status(500).render("inventory/add-inventory", {
       title: "Add Inventory",
       nav,
