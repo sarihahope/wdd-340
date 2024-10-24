@@ -146,7 +146,7 @@ async function updateAccount(req, res) {
   }
 }
 
-// add a function to handle the "account update" process, including: Return data to the update view for correction if errors are found. Set a success or failure message to inform the client. Query the account data from the database after the update is done. Deliver the management view where the updated account information will be displayed along with the success or failure message.
+//  Client to update thier information.
 async function buildUpdateAccount(req, res) {
   let nav = await utilities.getNav()
   const { id } = req.params
@@ -166,7 +166,7 @@ async function buildUpdateAccount(req, res) {
   })
 }
 
-// add a function to handle the "password change" process: If there is an error with the new password, set an error message and return to the update view to be fixed. If no error is found, the password must be hashed then sent to a function to be updated in the database. Determine the result of the update. Set a success or failure message to inform the client. Deliver the management view where the account information will be displayed along with the success or failure message.
+
 async function updateAccount(req, res) {
   let nav = await utilities.getNav()
   const { id } = req.params
