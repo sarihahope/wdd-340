@@ -19,7 +19,7 @@ router.post('/register', regValidate.regRules(), regValidate.checkRegData, accou
 
 router.post('/login',  regValidate.loginRules(), regValidate.checkLoginData, accountController.accountLogin)
 
-router.post('/updateAccount/:id', regValidate.regRules(), accountController.updateAccount)
+router.post('/update', accountController.updateAccount)
 
 
 module.exports = router;
