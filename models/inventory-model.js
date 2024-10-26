@@ -131,7 +131,76 @@ async function deleteInventoryItem(inv_id) {
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId,  getClassificationById, addClassificationModel, addInventoryModel, updateInventory, deleteInventoryItem}
+// Add Review to the database from the user input form 
+async function addReviewModel(review_name, review_content, review_rating, review_date, inv_id) {
+  try {
+    const sql = "INSERT INTO public.review (review_name, review_content, review_rating, review_date, inv_id) VALUES ($1, $2, $3, $4, $5) RETURNING *"
+    return await pool.query(sql, [review_name, review_content, review_rating, review_date, inv_id])
+  } catch (error) {
+    return error.message
+  }
+}
+
+// Get all reviews by inv_id
+async function getReviewsByInvId(inv_id) {
+  try {
+    const data = await pool.query(
+      `SELECT * FROM public.review AS r
+      JOIN public.inventory AS i
+      ON r.inv_id = i.inv_id
+      WHERE r.inv_id = $1`,
+      [inv_id]
+    )
+    return data.rows
+  } catch (error) {
+    console.error("getReviewsByInvId error " + error)
+  }
+}
+
+// Get all reviews by review_id
+async function getReviewById(review_id) {
+  try {
+    const data = await pool.query(
+      `SELECT * FROM public.review AS r
+      JOIN public.inventory AS i
+      ON r.inv_id = i.inv_id
+      WHERE r.review_id = $1`,
+      [review_id]
+    )
+    return data.rows[0]
+  }
+  catch (error) {
+    console.error("getReviewById error " + error)
+  }
+}
+
+// Update Review Data
+async function updateReview(review_id, review_name, review_content, review_rating, review_date, inv_id) {
+  try {
+    const sql = "UPDATE public.review SET review_name = $1, review_content = $2, review_rating = $3, review_date = $4, inv_id = $5 WHERE review_id = $6 RETURNING *"
+    const data = await pool.query(sql, [review_name, review_content, review_rating, review_date, inv_id, review_id])
+    return data.rows[0]
+  } catch (error) {
+    console.error("updateReview error " + error)
+  }
+}
+
+// Delete Review Item
+async function deleteReviewItem(review_id) {
+  try {
+    const sql = 'DELETE FROM review WHERE review_id = $1'
+    const data = await pool.query(sql, [review_id])
+    return data
+  } catch (error) {
+    new Error("Delete Review Error")
+  }
+}
+
+
+
+
+module.exports = {getClassifications, getInventoryByClassificationId,  getClassificationById, addClassificationModel, addInventoryModel, updateInventory, deleteInventoryItem, addReviewModel, getReviewsByInvId, getReviewById, updateReview, deleteReviewItem}
+
 
 
 

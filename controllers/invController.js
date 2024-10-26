@@ -332,6 +332,56 @@ invCont.deleteInventory = async function (req, res, next) {
   }
 }
 
+// Add a Review to single vehicle view 
+invCont.addReview = async function (req, res, next) {
+  const { inv_id, review_title, review_text, review_rating } = req.body
+  const review = await invModel.addReview(inv_id, review_title, review_text, review_rating)
+  if (review) {
+    req.flash("notice", "Review added.")
+    res.redirect(`/inv/detail/${inv_id}`)
+  } else {
+    req.flash("notice", "Review failed.")
+    res.redirect(`/inv/detail/${inv_id}`)
+  }
+}
+
+// Delete Review from single vehicle view
+invCont.deleteReview = async function (req, res, next) {
+  const { review_id, inv_id } = req.body
+  const review = await invModel.deleteReview(review_id)
+  if (review) {
+    req.flash("notice", "Review deleted.")
+    res.redirect(`/inv/detail/${inv_id}`)
+  } else {
+    req.flash("notice", "Review delete failed.")
+    res.redirect(`/inv/detail/${inv_id}`)
+  }
+}
+
+// Update Review from single vehicle view
+invCont.updateReview = async function (req, res, next) {
+  const { review_id, inv_id, review_title, review_text, review_rating } = req.body
+  const review = await invModel.updateReview(review_id, review_title, review_text, review_rating)
+  if (review) {
+    req.flash("notice", "Review updated.")
+    res.redirect(`/inv/detail/${inv_id}`)
+  } else {
+    req.flash("notice", "Review update failed.")
+    res.redirect(`/inv/detail/${inv_id}`)
+  }
+}
+
+invCont.addReviewView = async function (req, res, next) {
+  const inv_id = req.params.invId
+  let nav = await utilities.getNav()
+  res.render("inventory/add-review", {
+    title: "Add Review",
+    nav,
+    inv_id,
+    errors: null,
+  })
+}
+
 
 
 module.exports = invCont

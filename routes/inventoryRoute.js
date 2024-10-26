@@ -9,6 +9,8 @@ const invValidate = require('../utilities/inventory-validation');
 // Single & classification inventory view
 router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
 router.get("/detail/:invId", utilities.handleErrors(invController.buildSingleVehicle));
+router.post("/detail/:inv_id/reviews", invController.addReview);
+
 // Management route
 router.get("/", utilities.handleErrors(invController.renderManagementView));
 
@@ -21,6 +23,11 @@ router.get('/getInventory/:classification_id', utilities.handleErrors(invControl
 
 // view edit-inventory
 router.get("/edit/:invId", utilities.handleErrors(invController.editInventoryView));
+router.get("/delete/:invId", utilities.handleErrors(invController.deleteInventory));
+
+
+
+
 
 // Post reoutes
 // Update inventory
@@ -28,6 +35,9 @@ router.get("/edit/:invId", utilities.handleErrors(invController.editInventoryVie
 router.post("/update", utilities.handleErrors(invController.updateInventory));
 router.post("/add-classification", invValidate.inventoryRules(), invValidate.checkInvData, utilities.handleErrors(invController.addClassification));
 router.post('/add-inventory', invValidate.addInventoryRules(), invValidate.checkAddInvData, utilities.handleErrors(invController.addInventory))
+// route for adding review
+router.post('/add-review', utilities.handleErrors(invController.addReview));
+
 
 
 

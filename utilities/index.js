@@ -128,14 +128,34 @@ Util.buildAddInventoryForm = async function () {
   return form
 }
 
+
+/* ****************************************
+* middleware to clear jwt cookie on /logout
+**************************************** */
+Util.checkJWTTokenGlobally = (req, res, next) => {
+  if (req.cookies.jwt) {
+    jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET, (err, accountData) => {
+      if (err) {
+        res.clearCookie("jwt");
+        res.locals.loggedin = false;
+        return next();
+      }
+      res.locals.accountData = accountData;
+      res.locals.loggedin = true;
+      next();
+    });
+  } else {
+    res.locals.loggedin = false;
+    next();
+  }
+};
+
 /* ****************************************
 * Middleware to check token validity
 **************************************** */
 Util.checkJWTToken = (req, res, next) => {
   if (req.cookies.jwt) {
-   jwt.verify(
-    req.cookies.jwt,
-    process.env.ACCESS_TOKEN_SECRET,
+   jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET,
     function (err, accountData) {
      if (err) {
       req.flash("Please log in")
@@ -151,10 +171,39 @@ Util.checkJWTToken = (req, res, next) => {
   }
  }
 
-/* ****************************************
+ /* ****************************************
+* Middleware to check token validity
+**************************************** */
+Util.checkAccountTypeJWT = (req, res, next) => {
+  if (req.cookies.jwt) {
+    jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET, (err, accountData) => {
+      if (err) {
+        req.flash("notice", "Please log in");
+        res.clearCookie("jwt");
+        return res.redirect("/account/login");
+      }
+      if (accountData.account_type === 'employee' || accountData.account_type === 'admin') {
+        res.locals.accountData = accountData;
+        res.locals.loggedin = true;
+        next();
+      } else {
+        req.flash("notice", "Access denied. Admin or Employee account required.");
+        res.clearCookie("jwt");
+        return res.redirect("/account/login");
+      }
+    });
+  } else {
+    req.flash("notice", "Please log in");
+    return res.redirect("/account/login");
+  }
+};
+
+
+  
+ /* ****************************************
  *  Check Login
  * ************************************ */
-Util.checkLogin = (req, res, next) => {
+ Util.checkLogin = (req, res, next) => {
   if (res.locals.loggedin) {
     next()
   } else {
@@ -163,8 +212,10 @@ Util.checkLogin = (req, res, next) => {
   }
  }
 
-
-
+/* ****************************************
+ * Middleware For Handling Errors
+ * Wrap other function in this for 
+ * General Error Handling
+ **************************************** */
 Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
-
 module.exports = Util
